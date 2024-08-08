@@ -9,6 +9,7 @@ const useStore = useUserStore()
   <p>{{ useStore.token }}</p>
   <div>
     <el-button type="success" @click="useStore.setToken">登录</el-button>
+    <router-view></router-view>
   </div>
 </template>
 
