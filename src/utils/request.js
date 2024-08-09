@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-const baseURL = 'https://some-domain.com/api/'
+const baseURL = 'http://big-event-vue-api-t.itheima.net'
 
 const instance = axios.create({
   baseURL,

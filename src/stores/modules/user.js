@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const useUserStore = defineStore(
   'big-user',
   () => {
-    const token = ref('45354')
+    const token = ref()
     const setToken = () => {
       token.value = 'kahudfgsiufakfjkasbjd'
     }
