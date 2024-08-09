@@ -1,7 +1,8 @@
 <script setup>
-import { userRegisterService } from '@/api/user'
+import { userLoginService, userRegisterService } from '@/api/user'
+import { useUserStore } from '@/stores'
 import { User, Lock } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const isRegister = ref(true)
 // 绑定form数据对象
 const formModel = ref({
@@ -9,6 +10,7 @@ const formModel = ref({
   password: '',
   repassword: ''
 })
+
 // 设置校验规则
 const rules = {
   username: [
@@ -53,6 +55,27 @@ const register = async () => {
   ElMessage.success('注册成功')
   // 切换到登录
   isRegister.value = false
+}
+
+// 注册登录切换
+watch(isRegister, () => {
+  console.log('切换')
+  formModel.value = {
+    username: '',
+    password: '',
+    repassword: ''
+  }
+})
+
+// 登录
+const useStore = useUserStore()
+const login = async () => {
+  // console.log(123)
+  await form.value.validate()
+  const res = await userLoginService(formModel.value)
+  // console.log(res)
+  // 存储token
+  useStore.setToken(res.data.token)
 }
 </script>
 
@@ -147,7 +170,11 @@ const register = async () => {
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button class="button" type="primary" auto-insert-space
+          <el-button
+            @click="login"
+            class="button"
+            type="primary"
+            auto-insert-space
             >登录</el-button
           >
         </el-form-item>
