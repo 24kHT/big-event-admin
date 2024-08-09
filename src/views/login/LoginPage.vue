@@ -3,7 +3,9 @@ import { userLoginService, userRegisterService } from '@/api/user'
 import { useUserStore } from '@/stores'
 import { User, Lock } from '@element-plus/icons-vue'
 import { ref, watch } from 'vue'
-const isRegister = ref(true)
+import { useRouter } from 'vue-router'
+
+const isRegister = ref(false)
 // 绑定form数据对象
 const formModel = ref({
   username: '',
@@ -69,6 +71,7 @@ watch(isRegister, () => {
 
 // 登录
 const useStore = useUserStore()
+const router = useRouter()
 const login = async () => {
   // console.log(123)
   await form.value.validate()
@@ -76,6 +79,8 @@ const login = async () => {
   // console.log(res)
   // 存储token
   useStore.setToken(res.data.token)
+  // 跳转页面
+  router.push('/')
 }
 </script>
 
