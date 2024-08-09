@@ -19,7 +19,7 @@ const rules = {
     {
       pattern: /^\S{6,15}$/,
       message: '密码必须是6-15位的非空字符',
-      trigger: 'change'
+      trigger: 'blur'
     }
   ],
   repassword: [
