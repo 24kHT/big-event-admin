@@ -41,6 +41,15 @@ const rules = {
     }
   ]
 }
+
+//获取表单元素
+const form = ref()
+
+// 注册
+const register = async () => {
+  await form.value.validate() //注册前校验
+  console.log('开始注册请求')
+}
 </script>
 
 <template>
@@ -83,7 +92,12 @@ const rules = {
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="button" type="primary" auto-insert-space>
+          <el-button
+            @click="register"
+            class="button"
+            type="primary"
+            auto-insert-space
+          >
             注册
           </el-button>
         </el-form-item>
