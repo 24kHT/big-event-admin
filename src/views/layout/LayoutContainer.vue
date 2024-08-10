@@ -12,12 +12,26 @@ import {
 import avatar from '@/assets/default.png'
 import { useUserStore } from '@/stores'
 import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 // 获取用户信息
 const userStore = useUserStore()
 onMounted(() => {
   userStore.getUser()
 })
+
+// 下拉菜单跳转路由
+const router = useRouter()
+const handleCommand = (value) => {
+  // console.log(value)
+  // 退出登录
+  if (value === 'logout') {
+    userStore.setToken('')
+    userStore.deleteUser()
+    router.push('/login')
+  }
+  router.push(`/user/${value}`)
+}
 </script>
 
 <template>
@@ -66,7 +80,7 @@ onMounted(() => {
             userStore.user.nickname || userStore.user.username
           }}</strong>
         </div>
-        <el-dropdown placement="bottom-end">
+        <el-dropdown placement="bottom-end" @command="handleCommand">
           <span class="el-dropdown__box">
             <el-avatar :src="userStore.user.user_pic || avatar" />
             <el-icon><CaretBottom /></el-icon>
