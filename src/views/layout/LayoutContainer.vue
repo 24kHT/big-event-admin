@@ -22,10 +22,16 @@ onMounted(() => {
 
 // 下拉菜单跳转路由
 const router = useRouter()
-const handleCommand = (value) => {
+const handleCommand = async (value) => {
   // console.log(value)
   // 退出登录
   if (value === 'logout') {
+    // 退出登录提醒
+    await ElMessageBox.confirm('您确定要退出登录吗?', '退出登录', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
     userStore.setToken('')
     userStore.deleteUser()
     router.push('/login')
