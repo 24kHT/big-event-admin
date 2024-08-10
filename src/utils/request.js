@@ -42,9 +42,9 @@ instance.interceptors.response.use(
     // 对响应错误做点什么
     ElMessage({
       type: 'error',
-      message: err.response.data.message
+      message: err.response.data.message || '响应失败'
     })
-    if (err.response.status === '401') {
+    if (err.response.status === 401) {
       router.push('/login')
     }
     return Promise.reject(err)
