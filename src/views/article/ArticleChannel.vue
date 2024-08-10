@@ -5,11 +5,14 @@ import { ref } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 
 const channelList = ref([])
+const isLoading = ref(true)
+
 // 请求文章分类列表
 const getArtList = async () => {
   const res = await artGetChannelsService()
   channelList.value = res.data.data
   console.log(res)
+  isLoading.value = false
 }
 getArtList()
 
@@ -24,7 +27,7 @@ const onDelChannel = (row) => {
 <template>
   <PageContainer title="文章分类">
     <template #extra><el-button type="primary">添加分类</el-button></template>
-    <el-table :data="channelList" style="width: 100%">
+    <el-table v-loading="isLoading" :data="channelList" style="width: 100%">
       <el-table-column label="序号" width="100" type="index"> </el-table-column>
       <el-table-column label="分类名称" prop="cate_name"></el-table-column>
       <el-table-column label="分类别名" prop="cate_alias"></el-table-column>
