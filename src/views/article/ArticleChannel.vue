@@ -3,6 +3,7 @@ import { artGetChannelsService } from '@/api/article'
 import PageContainer from '@/components/PageContainer.vue'
 import { ref } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
+import ChannelEdit from './components/ChannelEdit.vue'
 
 const channelList = ref([])
 const isLoading = ref(true)
@@ -16,17 +17,26 @@ const getArtList = async () => {
 }
 getArtList()
 
+// 编辑分类按钮
 const onEditChannel = (row) => {
   console.log(row)
+  dialog.value.open(row)
 }
 const onDelChannel = (row) => {
   console.log(row)
+}
+// 添加分类按钮
+const dialog = ref()
+const onAddChannel = () => {
+  dialog.value.open({})
 }
 </script>
 
 <template>
   <PageContainer title="文章分类">
-    <template #extra><el-button type="primary">添加分类</el-button></template>
+    <template #extra>
+      <el-button type="primary" @click="onAddChannel">添加分类</el-button>
+    </template>
     <el-table v-loading="isLoading" :data="channelList" style="width: 100%">
       <el-table-column label="序号" width="100" type="index"> </el-table-column>
       <el-table-column label="分类名称" prop="cate_name"></el-table-column>
@@ -53,5 +63,6 @@ const onDelChannel = (row) => {
         <el-empty description="暂时还没有数据" />
       </template>
     </el-table>
+    <ChannelEdit ref="dialog"></ChannelEdit>
   </PageContainer>
 </template>
