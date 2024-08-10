@@ -29,8 +29,7 @@ const rules = {
 const dialogVisible = ref(false)
 const open = (row) => {
   dialogVisible.value = true
-  formModel.value.cate_name = row.cate_name
-  formModel.value.cate_alias = row.cate_alias
+  formModel.value = { ...row }
   console.log(row)
 }
 defineExpose({
@@ -38,7 +37,11 @@ defineExpose({
 })
 </script>
 <template>
-  <el-dialog v-model="dialogVisible" title="添加弹层" width="30%">
+  <el-dialog
+    v-model="dialogVisible"
+    :title="formModel.id ? '编辑分类' : '添加分类'"
+    width="30%"
+  >
     <el-form
       :model="formModel"
       :rules="rules"
