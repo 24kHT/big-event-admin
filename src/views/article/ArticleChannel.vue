@@ -1,5 +1,5 @@
 <script setup>
-import { artGetChannelsService } from '@/api/article'
+import { artDelChannelService, artGetChannelsService } from '@/api/article'
 import PageContainer from '@/components/PageContainer.vue'
 import { ref } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
@@ -9,13 +9,13 @@ const channelList = ref([])
 const isLoading = ref(true)
 
 // 请求文章分类列表
-const getArtList = async () => {
+const getChannelList = async () => {
   const res = await artGetChannelsService()
   channelList.value = res.data.data
   console.log(res)
   isLoading.value = false
 }
-getArtList()
+getChannelList()
 
 // 更新分类按钮
 const onEditChannel = (row) => {
@@ -23,8 +23,15 @@ const onEditChannel = (row) => {
   dialog.value.open(row)
 }
 // 删除分类按钮
-const onDelChannel = (row) => {
-  console.log(row)
+const onDelChannel = async (row) => {
+  await ElMessageBox.confirm('你确认删除该分类信息吗？', '温馨提示', {
+    type: 'warning',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
+  })
+  await artDelChannelService(row.id)
+  ElMessage({ type: 'success', message: '删除成功' })
+  getChannelList()
 }
 // 添加分类按钮
 const dialog = ref()
@@ -35,7 +42,7 @@ const onAddChannel = () => {
 // 增删改业务完成,刷新表单
 const onSuccess = () => {
   isLoading.value = true
-  getArtList()
+  getChannelList()
 }
 </script>
 
