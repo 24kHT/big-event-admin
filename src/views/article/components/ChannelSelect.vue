@@ -12,9 +12,15 @@ const getChannelList = async () => {
 getChannelList()
 const model = defineModel()
 console.log(model.value)
+defineProps({
+  width: {
+    type: String,
+    required: true
+  }
+})
 </script>
 <template>
-  <el-select style="width: 200px" v-model="model">
+  <el-select style="width" v-model="model">
     <el-option
       v-for="channel in channelList"
       :key="channel.id"

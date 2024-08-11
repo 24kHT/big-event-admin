@@ -81,6 +81,7 @@ const onEditArticle = (row) => {
     <el-form inline class="form">
       <el-form-item label="文章分类：">
         <ChannelSelect
+          style="width: 150px"
           @flesh="onFlesh"
           v-model="params.cate_id"
         ></ChannelSelect>
