@@ -17,11 +17,12 @@ const getArtList = async () => {
 }
 getArtList()
 
-// 编辑分类按钮
+// 更新分类按钮
 const onEditChannel = (row) => {
   console.log(row)
   dialog.value.open(row)
 }
+// 删除分类按钮
 const onDelChannel = (row) => {
   console.log(row)
 }
@@ -29,6 +30,12 @@ const onDelChannel = (row) => {
 const dialog = ref()
 const onAddChannel = () => {
   dialog.value.open({})
+}
+
+// 增删改业务完成,刷新表单
+const onSuccess = () => {
+  isLoading.value = true
+  getArtList()
 }
 </script>
 
@@ -63,6 +70,6 @@ const onAddChannel = () => {
         <el-empty description="暂时还没有数据" />
       </template>
     </el-table>
-    <ChannelEdit ref="dialog"></ChannelEdit>
+    <ChannelEdit ref="dialog" @success="onSuccess"></ChannelEdit>
   </PageContainer>
 </template>

@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { artAddChanenelService, artEditChannelService } from '@/api/article'
+import { ref, defineEmits } from 'vue'
 
 // 表单数据
 const formModel = ref({
@@ -35,6 +36,22 @@ const open = (row) => {
 defineExpose({
   open
 })
+
+// 提交信息
+const emit = defineEmits(['success'])
+const formRef = ref()
+const onSubmit = async () => {
+  await formRef.value.validate()
+  formModel.value.id
+    ? await artEditChannelService(formModel.value)
+    : await artAddChanenelService(formModel.value)
+  ElMessage({
+    type: 'success',
+    message: formModel.value.id ? '编辑成功' : '添加成功'
+  })
+  dialogVisible.value = false
+  emit('success')
+}
 </script>
 <template>
   <el-dialog
@@ -47,6 +64,7 @@ defineExpose({
       :rules="rules"
       label-width="100px"
       style="padding-right: 30px"
+      ref="formRef"
     >
       <el-form-item label="分类名称" prop="cate_name">
         <el-input
@@ -66,7 +84,7 @@ defineExpose({
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary"> 确认 </el-button>
+        <el-button type="primary" @click="onSubmit"> 确认 </el-button>
       </span>
     </template>
   </el-dialog>
