@@ -64,7 +64,7 @@ const onReset = () => {
 
 const articleEditRef = ref()
 
-// 编辑新增逻辑
+// 编辑新增和编辑文章逻辑
 const onAddArticle = () => {
   articleEditRef.value.open({})
 }
