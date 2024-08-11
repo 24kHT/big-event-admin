@@ -4,23 +4,10 @@ import { ref } from 'vue'
 import ChannelSelect from './components/ChannelSelect.vue'
 import { artGetListService } from '@/api/article'
 import { formatTime } from '@/utils/format'
-// 假数据
-const articleList = ref([
-  {
-    id: 5961,
-    title: '新的文章啊',
-    pub_date: '2022-07-10 14:53:52.604',
-    state: '已发布',
-    cate_name: '体育'
-  },
-  {
-    id: 5962,
-    title: '新的文章啊',
-    pub_date: '2022-07-10 14:54:30.904',
-    state: '草稿',
-    cate_name: '体育'
-  }
-])
+import articleEdit from '@/views/article/components/ArticleEdit.vue'
+
+// 文章列表数据
+const articleList = ref([])
 
 // 传参文章分类
 const params = ref({
@@ -30,9 +17,6 @@ const params = ref({
   state: ''
 })
 
-const onEditArticle = (row) => {
-  console.log(row)
-}
 const onDeleteArticle = (row) => {
   console.log(row)
 }
@@ -40,6 +24,7 @@ const onDeleteArticle = (row) => {
 // 获取文章列表
 const total = ref(0)
 
+const loading = ref(false)
 const getArticleList = async () => {
   loading.value = true
   const res = await artGetListService(params.value)
@@ -65,8 +50,6 @@ const onFlesh = () => {
   getArticleList()
 }
 
-const loading = ref(false)
-
 const onSearch = () => {
   params.value.pagenum = 1
   getArticleList()
@@ -78,12 +61,23 @@ const onReset = () => {
   params.value.state = ''
   getArticleList()
 }
+
+const articleEditRef = ref()
+
+// 编辑新增逻辑
+const onAddArticle = () => {
+  articleEditRef.value.open({})
+}
+const onEditArticle = (row) => {
+  articleEditRef.value.open(row)
+}
 </script>
 <template>
   <page-container title="文章管理">
     <template #extra>
-      <el-button type="primary">发布文章</el-button>
+      <el-button type="primary" @click="onAddArticle">发布文章</el-button>
     </template>
+    <articleEdit ref="articleEditRef"> </articleEdit>
     <el-form inline class="form">
       <el-form-item label="文章分类：">
         <ChannelSelect
