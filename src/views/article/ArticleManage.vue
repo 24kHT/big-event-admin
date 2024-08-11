@@ -66,6 +66,18 @@ const onFlesh = () => {
 }
 
 const loading = ref(false)
+
+const onSearch = () => {
+  params.value.pagenum = 1
+  getArticleList()
+}
+
+const onReset = () => {
+  params.value.pagenum = 1
+  params.value.cate_id = ''
+  params.value.state = ''
+  getArticleList()
+}
 </script>
 <template>
   <page-container title="文章管理">
@@ -86,8 +98,8 @@ const loading = ref(false)
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">搜索</el-button>
-        <el-button>重置</el-button>
+        <el-button @click="onSearch" type="primary">搜索</el-button>
+        <el-button @click="onReset">重置</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="articleList" style="width: 100%" v-loading="loading">
