@@ -2,6 +2,8 @@
 import { Delete, Edit } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import ChannelSelect from './components/ChannelSelect.vue'
+import { artGetListService } from '@/api/article'
+import { formatTime } from '@/utils/format'
 // 假数据
 const articleList = ref([
   {
@@ -24,7 +26,7 @@ const articleList = ref([
 const params = ref({
   pagenum: 1,
   pagesize: 5,
-  cate_id: '29353',
+  cate_id: '',
   state: ''
 })
 
@@ -34,6 +36,36 @@ const onEditArticle = (row) => {
 const onDeleteArticle = (row) => {
   console.log(row)
 }
+
+// 获取文章列表
+const total = ref(0)
+
+const getArticleList = async () => {
+  loading.value = true
+  const res = await artGetListService(params.value)
+  articleList.value = res.data.data
+  total.value = res.data.total
+  console.log(articleList.value)
+  loading.value = false
+}
+getArticleList()
+
+const onSizeChange = (size) => {
+  params.value.pagenum = 1
+  params.value.pagesize = size
+  getArticleList()
+}
+const onCurrentChange = (page) => {
+  params.value.pagenum = page
+  getArticleList()
+}
+
+// 刷新表格
+const onFlesh = () => {
+  getArticleList()
+}
+
+const loading = ref(false)
 </script>
 <template>
   <page-container title="文章管理">
@@ -42,9 +74,12 @@ const onDeleteArticle = (row) => {
     </template>
     <el-form inline class="form">
       <el-form-item label="文章分类：">
-        <ChannelSelect v-model="params.cate_id"></ChannelSelect>
+        <ChannelSelect
+          @flesh="onFlesh"
+          v-model="params.cate_id"
+        ></ChannelSelect>
       </el-form-item>
-      <el-form-item label="发布状态：">
+      <el-form-item label="发布状态：" style="width: 200px">
         <el-select v-model="params.state">
           <el-option label="已发布" value="已发布"></el-option>
           <el-option label="草稿" value="草稿"></el-option>
@@ -55,14 +90,18 @@ const onDeleteArticle = (row) => {
         <el-button>重置</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="articleList" style="width: 100%">
+    <el-table :data="articleList" style="width: 100%" v-loading="loading">
       <el-table-column label="文章标题" width="400">
         <template #default="{ row }">
           <el-link type="primary" :underline="false">{{ row.title }}</el-link>
         </template>
       </el-table-column>
       <el-table-column label="分类" prop="cate_name"></el-table-column>
-      <el-table-column label="发表时间" prop="pub_date"> </el-table-column>
+      <el-table-column label="发表时间" prop="pub_date">
+        <template #default="{ row }">
+          {{ formatTime(row.pub_date) }}
+        </template>
+      </el-table-column>
       <el-table-column label="状态" prop="state"></el-table-column>
       <el-table-column label="操作" width="100">
         <template #default="{ row }">
@@ -86,6 +125,17 @@ const onDeleteArticle = (row) => {
         <el-empty description="没有数据" />
       </template>
     </el-table>
+    <el-pagination
+      v-model:current-page="params.pagenum"
+      v-model:page-size="params.pagesize"
+      :page-sizes="[2, 3, 4, 5, 10]"
+      layout="jumper, total, sizes, prev, pager, next"
+      background
+      :total="total"
+      @size-change="onSizeChange"
+      @current-change="onCurrentChange"
+      style="margin-top: 20px; justify-content: flex-end"
+    />
   </page-container>
 </template>
 
