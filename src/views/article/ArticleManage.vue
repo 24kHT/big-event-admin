@@ -71,13 +71,23 @@ const onAddArticle = () => {
 const onEditArticle = (row) => {
   articleEditRef.value.open(row)
 }
+
+// 添加修改成功
+const onSuccess = (type) => {
+  if (type === 'add') {
+    // 如果是添加，需要跳转渲染最后一页，编辑直接渲染当前页
+    const lastPage = Math.ceil((total.value + 1) / params.value.pagesize)
+    params.value.pagenum = lastPage
+  }
+  getArticleList()
+}
 </script>
 <template>
   <page-container title="文章管理">
     <template #extra>
       <el-button type="primary" @click="onAddArticle">发布文章</el-button>
     </template>
-    <articleEdit ref="articleEditRef"> </articleEdit>
+    <article-edit ref="articleEditRef" @success="onSuccess"></article-edit>
     <el-form inline class="form">
       <el-form-item label="文章分类：">
         <ChannelSelect

@@ -4,6 +4,7 @@ import { Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import { artPublishService } from '@/api/article'
 
 const visibleDrawer = ref(false)
 
@@ -45,6 +46,29 @@ const onUploadFile = (uploadFile) => {
   // console.log(uploadFile)
   imgUrl.value = URL.createObjectURL(uploadFile.raw)
   formModel.value.cover_img = uploadFile.raw
+}
+
+// 发布文章
+const emit = defineEmits(['success'])
+const onPublish = async (state) => {
+  // 将已发布还是草稿状态，存入 state
+  formModel.value.state = state
+
+  // 转换 formData 数据
+  const fd = new FormData()
+  for (let key in formModel.value) {
+    fd.append(key, formModel.value[key])
+  }
+
+  if (formModel.value.id) {
+    console.log('编辑操作')
+  } else {
+    // 添加请求
+    await artPublishService(fd)
+    ElMessage.success('添加成功')
+    visibleDrawer.value = false
+    emit('success', 'add')
+  }
 }
 </script>
 
@@ -88,8 +112,8 @@ const onUploadFile = (uploadFile) => {
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">发布</el-button>
-        <el-button type="info">草稿</el-button>
+        <el-button @click="onPublish('已发布')" type="primary">发布</el-button>
+        <el-button @click="onPublish('草稿')" type="info">草稿</el-button>
       </el-form-item>
     </el-form>
   </el-drawer>
