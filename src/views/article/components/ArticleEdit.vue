@@ -4,7 +4,13 @@ import { Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
-import { artPublishService } from '@/api/article'
+import {
+  artEditService,
+  artGetDetailService,
+  artPublishService
+} from '@/api/article'
+import { baseURL } from '@/utils/request'
+import { imageUrlToFile } from '@/utils/imgToFile'
 
 const visibleDrawer = ref(false)
 
@@ -33,6 +39,15 @@ const open = async (row) => {
   visibleDrawer.value = true
   if (row.id) {
     console.log('编辑回显')
+    const res = await artGetDetailService(row.id)
+    formModel.value = res.data.data
+    imgUrl.value = baseURL + formModel.value.cover_img
+    // 提交给后台，需要的是 file 格式的，将网络图片，转成 file 格式
+    // 网络图片转成 file 对象, 需要转换一下
+    formModel.value.cover_img = await imageUrlToFile(
+      imgUrl.value,
+      formModel.value.cover_img
+    )
   } else {
     formModel.value = { ...defaultForm }
     imgUrl.value = ''
@@ -64,7 +79,10 @@ const onPublish = async (state) => {
   }
 
   if (formModel.value.id) {
-    console.log('编辑操作')
+    await artEditService(fd)
+    ElMessage.success('编辑成功')
+    visibleDrawer.value = false
+    emit('success', 'edit')
   } else {
     // 添加请求
     await artPublishService(fd)

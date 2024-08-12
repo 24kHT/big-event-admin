@@ -21,3 +21,10 @@ export const artGetListService = (params) =>
 
 // 发布文章
 export const artPublishService = (data) => request.post('/my/article/add', data)
+
+// 获取文章
+export const artGetDetailService = (id) =>
+  request.get('my/article/info', { params: { id } })
+
+// 编辑文章
+export const artEditService = (data) => request.put('my/article/info', data)
