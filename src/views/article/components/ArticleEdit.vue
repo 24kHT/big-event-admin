@@ -2,6 +2,9 @@
 import ChannelSelect from './ChannelSelect.vue'
 import { Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
+
 const visibleDrawer = ref(false)
 
 //接收数据
@@ -76,7 +79,13 @@ const onUploadFile = (uploadFile) => {
         </el-upload>
       </el-form-item>
       <el-form-item label="文章内容" prop="content">
-        <div class="editor">富文本编辑器</div>
+        <div class="editor">
+          <QuillEditor
+            theme="snow"
+            v-model:content="formModel.content"
+            contentType="html"
+          />
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button type="primary">发布</el-button>
@@ -111,6 +120,13 @@ const onUploadFile = (uploadFile) => {
       height: 178px;
       text-align: center;
     }
+  }
+}
+
+.editor {
+  width: 100%;
+  :deep(.ql-editor) {
+    min-height: 200px;
   }
 }
 </style>
