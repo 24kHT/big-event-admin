@@ -18,6 +18,10 @@ export const useUserStore = defineStore(
       user.value = res.data.data
     }
 
+    // 存储用户信息
+    const setUser = (userValue) => {
+      user.value = userValue
+    }
     // 删除用户信息
     const deleteUser = () => {
       user.value = {}
@@ -27,7 +31,8 @@ export const useUserStore = defineStore(
       setToken,
       user,
       getUser,
-      deleteUser
+      deleteUser,
+      setUser
     }
   },
   {

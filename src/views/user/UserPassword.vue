@@ -1,5 +1,8 @@
 <script setup>
+import { userUpdatePasswordService } from '@/api/user'
+import { useUserStore } from '@/stores'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 const pwdForm = ref({
   old_pwd: '',
   new_pwd: '',
@@ -51,6 +54,23 @@ const rules = {
     },
     { validator: checkNewSame, trigger: 'blur' }
   ]
+}
+
+const formRef = ref()
+const router = useRouter()
+const userStore = useUserStore()
+const onSubmit = async () => {
+  const valid = await formRef.value.validate()
+  if (valid) {
+    await userUpdatePasswordService(pwdForm.value)
+    ElMessage({ type: 'success', message: '更换密码成功' })
+    userStore.setToken('')
+    userStore.setUser({})
+    router.push('/login')
+  }
+}
+const onReset = () => {
+  formRef.value.resetFields()
 }
 </script>
 <template>
