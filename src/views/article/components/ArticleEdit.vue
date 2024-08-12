@@ -27,13 +27,16 @@ const defaultForm = {
 }
 const formModel = ref({ ...defaultForm })
 
+const formRef = ref()
+const editorRef = ref()
 const open = async (row) => {
   visibleDrawer.value = true
   if (row.id) {
     console.log('编辑回显')
   } else {
-    console.log('添加功能')
     formModel.value = { ...defaultForm }
+    imgUrl.value = ''
+    editorRef.value.setHTML('')
   }
 }
 defineExpose({
@@ -105,6 +108,7 @@ const onPublish = async (state) => {
       <el-form-item label="文章内容" prop="content">
         <div class="editor">
           <QuillEditor
+            ref="editorRef"
             theme="snow"
             v-model:content="formModel.content"
             contentType="html"
