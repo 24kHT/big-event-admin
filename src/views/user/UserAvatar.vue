@@ -2,17 +2,27 @@
 import { ref } from 'vue'
 import { Plus, Upload } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores'
+import { userUpdateAvatarService } from '@/api/user'
 
 const userStore = useUserStore()
 
 const imgUrl = ref(userStore.user.user_pic)
 const uploadRef = ref()
+
+// 更新头像
 const onUploadFile = (file) => {
   const reader = new FileReader()
   reader.readAsDataURL(file.raw)
   reader.onload = () => {
     imgUrl.value = reader.result
   }
+  userStore.user.user_pic = imgUrl.value
+}
+
+const onUpdateAvatar = async () => {
+  await userUpdateAvatarService(imgUrl.value)
+  await userStore.getUser()
+  ElMessage({ type: 'success', message: '更换头像成功' })
 }
 </script>
 
@@ -38,7 +48,12 @@ const onUploadFile = (file) => {
           size="large"
           >选择图片</el-button
         >
-        <el-button type="success" :icon="Upload" size="large">
+        <el-button
+          type="success"
+          :icon="Upload"
+          size="large"
+          @click="onUpdateAvatar"
+        >
           上传头像
         </el-button>
       </el-col>
