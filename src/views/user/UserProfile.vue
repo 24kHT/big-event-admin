@@ -44,23 +44,32 @@ const onSubmit = async () => {
 }
 </script>
 <template>
-  <el-form :model="userInfo" :rules="rules" ref="formRef" label-width="120px">
-    <el-form-item label="登录名称">
-      <el-input v-model="userInfo.username" disabled></el-input>
-    </el-form-item>
+  <el-row>
+    <el-col :span="12">
+      <el-form
+        :model="userInfo"
+        :rules="rules"
+        ref="formRef"
+        label-width="120px"
+      >
+        <el-form-item label="登录名称">
+          <el-input v-model="userInfo.username" disabled></el-input>
+        </el-form-item>
 
-    <el-form-item label="用户昵称" prop="nickname">
-      <el-input v-model="userInfo.nickname"></el-input>
-    </el-form-item>
+        <el-form-item label="用户昵称" prop="nickname">
+          <el-input v-model="userInfo.nickname"></el-input>
+        </el-form-item>
 
-    <el-form-item label="用户邮箱" prop="email">
-      <el-input v-model="userInfo.email"></el-input>
-    </el-form-item>
+        <el-form-item label="用户邮箱" prop="email">
+          <el-input v-model="userInfo.email"></el-input>
+        </el-form-item>
 
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit">提交修改</el-button>
-    </el-form-item>
-  </el-form>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">提交修改</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
