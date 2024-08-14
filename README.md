@@ -1,10 +1,14 @@
-markdown
-# BigEvent - 黑马程序员大事件
+# BigEvent - 大事件系统
 
 欢迎来到 **BigEvent** 项目，这是一个基于 **Vue 3** 的实战项目，旨在展示现代前端开发的最佳实践和技术应用。
 
 ## 项目简介
-
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Vue.js](https://img.shields.io/badge/Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+![pnpm](https://img.shields.io/badge/pnpm-yellow?style=for-the-badge&logo=pnpm&logoColor=white) </br>
 BigEvent 是一个功能丰富的前端项目，结合了 **Element Plus**、**Pinia** 和 **Vue 3** 等现代技术栈。该项目不仅提供了一系列实用功能，还通过实际操作帮助开发者深入理解前端开发中的关键概念和技术。
 
 ## 技术栈
