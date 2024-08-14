@@ -36,6 +36,10 @@ BigEvent 是一个功能丰富的前端项目，结合了 **Element Plus**、**P
 6. **图片上传功能**：
    - 实现了实用的图片上传功能，结合了 `el-upload` 组件，提升了用户体验和功能完整性。
 
+## 项目预览
+![示例图片](https://pic4.zhimg.com/100/v2-abdf7176e98051c6d796aa9a68fe8c73_r.jpg)
+![示例图片](https://pic2.zhimg.com/100/v2-cbe4d991ddf4c257b2fa0b272ef38a85_r.jpg)
+
 ## 如何开始
 
 要运行该项目，请按照以下步骤进行：
