@@ -1,35 +1,66 @@
-# big-event-admin
+markdown
+# BigEvent - 黑马程序员大事件
 
-This template should help get you started developing with Vue 3 in Vite.
+欢迎来到 **BigEvent** 项目，这是一个基于 **Vue 3** 的实战项目，旨在展示现代前端开发的最佳实践和技术应用。
 
-## Recommended IDE Setup
+## 项目简介
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+BigEvent 是一个功能丰富的前端项目，结合了 **Element Plus**、**Pinia** 和 **Vue 3** 等现代技术栈。该项目不仅提供了一系列实用功能，还通过实际操作帮助开发者深入理解前端开发中的关键概念和技术。
 
-## Customize configuration
+## 技术栈
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- **Vue 3**：前端主流框架，掌握基础知识点并运用到项目中。
+- **Element Plus**：使用高效的 UI 组件库，加速开发进程。
+- **Pinia**：状态管理库，用于维护应用的全局状态。
+- **Axios**：异步函数库，处理 HTTP 请求，简化与后端的交互。
+- **Vue-Router**：管理 Vue 应用的路由，实现页面间的导航。
+- **Validation**：参数校验框架，有效进行数据校验，确保数据的有效性。
 
-## Project Setup
+## 项目亮点
 
-```sh
-pnpm install
-```
+1. **深度校验**：
+   - 深入理解了 `Validated` 的使用场景，实现自定义注解校验，确保用户输入数据的准确性。
 
-### Compile and Hot-Reload for Development
+2. **全局异常处理**：
+   - 对代码进行了优化，增强了异常处理能力，提高了系统的稳定性和可维护性。
 
-```sh
-pnpm dev
-```
+3. **开发体验优化**：
+   - 优化了代码组织结构，提升了开发过程中的快捷操作体验，使得开发更为高效。
 
-### Compile and Minify for Production
+4. **工程化开发**：
+   - 清晰讲解了现代前端工程化的关键概念，如路由管理、拦截器、状态管理等，同时使用了 Vue 3 的最新语法特性。
 
-```sh
-pnpm build
-```
+5. **前端工具体验**：
+   - 通过便捷的前端工具，提升了代码导入和组织方面的效率，简化了开发流程。
 
-### Lint with [ESLint](https://eslint.org/)
+6. **图片上传功能**：
+   - 实现了实用的图片上传功能，结合了 `el-upload` 组件，提升了用户体验和功能完整性。
 
-```sh
-pnpm lint
-```
+## 如何开始
+
+要运行该项目，请按照以下步骤进行：
+
+1. 克隆仓库：
+   ```bash
+   git clone https://github.com/yourusername/big-event.git
+   cd big-event
+安装依赖：
+
+bash
+npm install
+启动项目：
+
+bash
+npm run serve
+打开浏览器访问 http://localhost:8080。
+
+贡献
+我们欢迎任何形式的贡献！如果您想参与此项目，请查看 CONTRIBUTING.md 文件，了解如何开始。
+
+许可证
+本项目采用 MIT 许可证。有关详细信息，请查看 LICENSE 文件。
+
+联系方式
+如有疑问或建议，请联系我：your-email@example.com。
+
+感谢您对 BigEvent 项目的关注，希望本项目能助力您的学习与成长！
