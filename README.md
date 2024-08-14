@@ -50,16 +50,16 @@ BigEvent 是一个功能丰富的前端项目，结合了 **Element Plus**、**P
 
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/yourusername/big-event.git
+   git clone https://github.com/24kHT/big-event-admin.git
    cd big-event
 安装依赖：
 
-bash
-npm install
+```cmd
+pnpm install
 启动项目：
 
-bash
-npm run serve
+cmd
+pnpm dev
 打开浏览器访问 http://localhost:8080。
 
 贡献
