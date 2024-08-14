@@ -1,6 +1,6 @@
 # BigEvent - 墨语云端
 
-欢迎来到 **墨语云端** 项目，这是一个基于 **Vue 3** 的实战项目，旨在展示现代前端开发的最佳实践和技术应用。
+欢迎来到 **墨语云端** 项目，这是一个基于 **Vue 3** 的实战项目，记录生活撰写文章的系统，是现代前端开发框架下的实践和技术应用。
 
 ## 项目简介
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
