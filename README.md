@@ -69,6 +69,6 @@ npm run serve
 本项目采用 MIT 许可证。有关详细信息，请查看 LICENSE 文件。
 
 联系方式
-如有疑问或建议，请联系我：your-email@example.com。
+如有疑问或建议，请联系我：ht24k@foxmail.com。
 
 感谢您对 BigEvent 项目的关注，希望本项目能助力您的学习与成长！
